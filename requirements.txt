@@ -1,0 +1,66 @@
+# Django>=4.0,<5.0
+# djangorestframework>=3.12.0,<4.0
+# python-dotenv>=0.19.0
+# gunicorn>=20.1.0
+# psycopg2>=2.9.3  # Required for PostgreSQL support
+# transformers>=4.18.0  # Hugging Face transformers library
+
+# Django Framework
+Django==4.2.7
+djangorestframework==3.14.0
+
+# Database
+psycopg2-binary==2.9.9
+dj-database-url==2.1.0
+
+# Environment variables
+python-dotenv==1.0.0
+
+# Web server for production
+gunicorn==21.2.0
+
+# HTTP requests (for news API calls)
+requests==2.31.0
+
+# HTML parsing (for web scraping if needed)
+beautifulsoup4==4.12.2
+lxml==4.9.3
+
+# Date/time handling
+python-dateutil==2.8.2
+
+# Image processing (if handling news images)
+Pillow==10.1.0
+
+# Caching (optional but recommended)
+redis==5.0.1
+django-redis==5.4.0
+
+# CORS handling (if building API)
+django-cors-headers==4.3.1
+
+# Security enhancements
+django-environ==0.11.2
+
+# Testing (optional but good to have)
+coverage==7.3.2
+
+# Static file handling
+whitenoise==6.6.0
+
+# Timezone handling
+pytz==2023.3
+
+# JSON Web Tokens (if using for API auth)
+PyJWT==2.8.0
+
+# Markdown support (for rich text content)
+markdown==3.5.1
+
+# Utilities
+six==1.16.0
+urllib3==2.1.0
+certifi==2023.11.17
+
+# Development tools (optional)
+django-extensions==3.2.3
