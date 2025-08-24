@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
@@ -8,6 +9,9 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Add apps directory to Python path
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
@@ -25,13 +29,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'news',  # Your news app
-    'users',  # Your users app
+    'news',  # Your news app (now at root level)
+    'users',  # Your users app (now at root level)
     'rest_framework',  # For API
+    'whitenoise.runserver_nostatic',  # For static files in production
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # For static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -45,7 +51,9 @@ ROOT_URLCONF = 'news_aggregator.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [
+            BASE_DIR / 'apps' / 'templates',  # Updated path for templates
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,12 +99,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-
-# Collect static files for production
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# You can remove STATICFILES_DIRS if it's not needed in production
-STATICFILES_DIRS = []  # Keep empty or delete if not used
+# Static files directories
+STATICFILES_DIRS = [
+    BASE_DIR / 'apps' / 'static',
+]
+
+# Static files storage (for production)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -106,3 +117,12 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 # Hugging Face API Key (optional if needed)
 HUGGINGFACE_API_KEY = os.getenv('HUGGINGFACE_API_KEY')
+
+# Security settings for production
+if not DEBUG:
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = 'DENY'
