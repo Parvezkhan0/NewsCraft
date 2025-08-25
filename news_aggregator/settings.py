@@ -29,8 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'news',  # Your news app (now at root level)
-    'users',  # Your users app (now at root level)
+    'apps.news',     # Changed from 'news'
+    'apps.users',    # Changed from 'users'
     'rest_framework',  # For API
     'whitenoise.runserver_nostatic',  # For static files in production
 ]

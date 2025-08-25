@@ -3,6 +3,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('news.urls')),  # Include URLs from the news app
-    path('users/', include('users.urls')),  # Include URLs from the users app
+    path('', include('apps.news.urls')),      # Add 'apps.' prefix
+    path('users/', include('apps.users.urls')),  # Add 'apps.' prefix
 ]
