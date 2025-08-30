@@ -1,10 +1,10 @@
 # 📰 Personalized News Aggregator
 
 This is a Django-based web application designed to aggregate and personalize news articles based on user preferences. The application leverages AI/ML techniques for natural language processing (NLP) to provide a customized news feed experience.
-
+ 
 ## 🚀 Features
 
-- 🔐 **User Registration and Authentication:** Secure user accounts with email verification and password management.
+- 🔐 **User Registration and Authentication:** Secure user accounts with email verification & password management.
 - 📰 **Personalized News Feed:** Curated news articles tailored to individual user preferences.
 - 📱 **Responsive Design:** Optimized for mobile and desktop viewing.
 - 🔄 **Real-time Updates:** Live news updates with WebSockets (if using ASGI).
